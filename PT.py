@@ -33,6 +33,12 @@ class Pokedex:
 	def get_unknown(self):
 		return self.unknown
 	
+	def get_all(self):
+		if len(self.pokemon):
+			return self.pokemon
+		else:
+			return [self.unknown]
+	
 	def add(self,pokemon):
 		for stored_pokemon in self.pokemon:
 			if stored_pokemon.get_name().lower() == pokemon.get_name().lower():
@@ -107,6 +113,11 @@ class Pokemon:
 		self.stats = []
 		self.weaknesses = []
 		self.image = wx.Bitmap('Images/0.png',wx.BITMAP_TYPE_PNG)
+	
+	def get(self):
+		data = [self.name,self.type]
+		data.extend(self.stats)
+		return data
 	
 	def set_name(self,name):
 		self.name = name
@@ -338,56 +349,58 @@ class Window(wx.Frame):
 		else:
 			self.LC.SetItemBackgroundColour(index,color2)
 		
-	def set(self,subset):
+	def set_items(self,set):
 		self.LC.DeleteAllItems()
-		for index,pokemon in enumerate(subset):
-			self.add_stats(index,pokemon)
+		for index,pokemon in enumerate(set):
+			self.append_item(pokemon)
 			self.set_item_color(index,'pink','white')
 			
-	def add(self,subset):
+	def add_items(self,set):
 		column = self.CB.GetSelection()
 		i,max_i = (0,self.LC.GetItemCount())
-		j,max_j = (0,len(subset))
+		j,max_j = (0,len(set))
 		while True:
 			if j == max_j: break
 			elif i == max_i:
-				self.add_stats(i,subset[j])
+				self.insert_item(i,set[j])
 				max_i += 1
 			else:
 				ListItem = self.LC.GetItem(i,column)
 				ItemText = ListItem.GetText()
-				if not subset[j].get_name() == ItemText:
-					self.add_stats(i,subset[j])
+				if not set[j].get_name() == ItemText:
+					self.insert_item(i,set[j])
 					max_i += 1
 			self.set_item_color(i,'pink','white')
-			i,j = (i + 1,j + 1)
+			i,j = (i+1,j+1)
 				
 	def refresh(self,filter):
-		selection = self.CB.GetSelection()
 		if self.track_mode:
-			if selection == 0:
-				subset = self.Tracked.name_filter(filter)
-			else:
+			if filter == '':
+				subset = self.Tracked.get_all()
+			elif self.CB.GetSelection():
 				subset = self.Tracked.type_filter(filter)
-		else:
-			if selection == 0:
-				subset = self.Pokedex.name_filter(filter)
 			else:
+				subset = self.Tracked.name_filter(filter)
+		else:
+			if filter == '':
+				subset = self.Pokedex.get_all()
+			elif self.CB.GetSelection():
 				subset = self.Pokedex.type_filter(filter)
+			else:
+				subset = self.Pokedex.name_filter(filter)
 		if subset[0].get_name() == '???':
 			self.LC.DeleteAllItems()
 		elif self.p_filter in filter:
-			self.set(subset)
+			self.set_items(subset)
 		else:
-			self.add(subset)
+			self.add_items(subset)
 		self.p_filter = filter
 		self.SB1.SetLabel(subset[0].get_name())
 		self.set_image(subset[0].get_image())
 		self.set_weaknesses(subset[0])
-		
 		self.LC.Select(0,on=1)
 	
-	def add_stats(self, index, pokemon):
+	def insert_item(self, index, pokemon):
 		self.LC.InsertStringItem(index,pokemon.get_name())
 		self.LC.SetStringItem(index,1,pokemon.get_type())
 		self.LC.SetStringItem(index,2,pokemon.get_total())
@@ -397,6 +410,9 @@ class Window(wx.Frame):
 		self.LC.SetStringItem(index,6,pokemon.get_spatk())
 		self.LC.SetStringItem(index,7,pokemon.get_spdef())
 		self.LC.SetStringItem(index,8,pokemon.get_spd())
+	
+	def append_item(self, pokemon):
+		self.LC.Append(pokemon.get())
 	
 	def set_information(self,event):
 		self.LC2.DeleteAllItems()
