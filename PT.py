@@ -212,7 +212,10 @@ class Window(wx.Frame):
 		#create menubar
 		self.menubar = wx.MenuBar()
 		self.filemenu = wx.Menu()
-		self.m_stayontop = self.filemenu.Append(wx.ID_ANY,'Stay on Top [Off]\tCtrl-S','')
+		self.settings = wx.Menu()
+		self.m_stayontop = self.settings.Append(wx.ID_ANY,'Stay on Top [Off]\tCtrl-S','')
+		self.m_resize = self.settings.Append(wx.ID_ANY,'Resizable [Off]\tCtrl-E','')
+		self.filemenu.AppendMenu(wx.ID_ANY,'Options...',self.settings)
 		self.m_track = self.filemenu.Append(wx.ID_ANY,'Show Tracked\tCtrl-T','')
 		self.m_rescrape = self.filemenu.Append(wx.ID_ANY,'Rescrape Html\tCtrl-R','')
 		self.m_close = self.filemenu.Append(wx.ID_ANY, 'Close\tCtrl-Q','')
@@ -223,8 +226,8 @@ class Window(wx.Frame):
 		self.Bind(wx.EVT_MENU, self.CloseWindow, self.m_close)
 		#Creating list that will store all pokemon
 		self.LC = wx.ListCtrl(self,-1,style=wx.LC_REPORT | wx.LC_SINGLE_SEL)
+		#Creating list for weaknesses
 		self.LC2 = AutoWidthListCtrl(self)
-		self.dc = wx.ClientDC(self.LC2)
 		#Inserting columns into that list of pokemon
 		self.LC.InsertColumn(0,'Pokemon',format=wx.LIST_FORMAT_LEFT,width=90)
 		self.LC.InsertColumn(1,'Type',format=wx.LIST_FORMAT_CENTER,width=100)
@@ -298,6 +301,12 @@ class Window(wx.Frame):
 		else:
 			self.m_stayontop.SetItemLabel('Stay on Top [Off]\tCtrl-S')
 	
+	def resizable(self,event):
+		if self.ToggleWindowStyle(flag = wx.RESIZE_BORDER | wx.MAXIMIZE_BOX):
+			self.m_resize.SetItemLabel('Resizable [Off]\tCtrl-E')
+		else:
+			self.m_resize.SetItemLabel('Resizable [On]\tCtrl-E')
+	
 	def track(self,event):
 		if self.LC.GetItemCount():
 			index = self.LC.GetFocusedItem()
@@ -322,11 +331,18 @@ class Window(wx.Frame):
 			self.track_mode = 1
 		self.input.SetValue('')
 		self.refresh('')
+	
+	def set_item_color(self,index,color1,color2):
+		if index % 2:
+			self.LC.SetItemBackgroundColour(index,color1)
+		else:
+			self.LC.SetItemBackgroundColour(index,color2)
 		
 	def set(self,subset):
 		self.LC.DeleteAllItems()
 		for index,pokemon in enumerate(subset):
 			self.add_stats(index,pokemon)
+			self.set_item_color(index,'pink','white')
 			
 	def add(self,subset):
 		column = self.CB.GetSelection()
@@ -343,6 +359,7 @@ class Window(wx.Frame):
 				if not subset[j].get_name() == ItemText:
 					self.add_stats(i,subset[j])
 					max_i += 1
+			self.set_item_color(i,'pink','white')
 			i,j = (i + 1,j + 1)
 				
 	def refresh(self,filter):
