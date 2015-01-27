@@ -6,4 +6,4 @@ Executable is for Windows.
 Python 2.7 (32-bit) w/ wxPython
 Works okay with Linux (Have to run using Python Interpreter).
 
-For executable to run properly.  Keep Pokedex Folder structure as is.
+For executable to run properly, keep Pokedex folder structure as is.
