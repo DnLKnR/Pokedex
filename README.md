@@ -1,17 +1,9 @@
 # Pokedex
 Pokemon Index w/ Type weakness
 
-To run:
+Executable is for Windows.
 
-File Structure:
-|-/<YourFolder>/
-    |--Images/*
-    |--PT.exe
-    |--pokedata.cfg
-    |--pokedata.default.cfg
+Python 2.7 (32-bit) w/ wxPython
+Works okay with Linux (Have to run using Python Interpreter).
 
-
-
-      
-        
-
+For executable to run properly.  Keep Pokedex Folder structure as is.
