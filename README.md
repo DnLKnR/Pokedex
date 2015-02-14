@@ -15,7 +15,7 @@ For executable to run properly, keep Pokedex folder structure as is.
 
 
 
-To Run the *.py file:
+*To Run the \*.py file:*
 
 1. Download Python 3.4: https://www.python.org/downloads/
 
@@ -23,9 +23,9 @@ To Run the *.py file:
 
     Example:
     
-      "wxPython_Phoenix-3.0.3.<ignore this>-cp34-none-win_amd64.whl" would by Python 3.4 (cp34) 64-bit (amd64).
+      "wxPython_Phoenix-3.0.3.\<ignore this\>-cp34-none-win_amd64.whl" would by Python 3.4 (cp34) 64-bit (amd64).
       
-      "wxPython_Phoenix-3.0.3.<ignore this>-cp34-none-win32.whl" would by Python 3.4 (cp34) 32-bit (win32).
+      "wxPython_Phoenix-3.0.3.\<ignore this\>-cp34-none-win32.whl" would by Python 3.4 (cp34) 32-bit (win32).
   
   
 
@@ -36,15 +36,15 @@ To Run the *.py file:
   >python.exe -m pip install <paste link>
   
   
-Note if you get these errors:
+_*Note if you get these errors:*_
 
-*vcvarsall.bat doens't exist: 
+*vcvarsall.bat doens't exist:* 
 
 Go and Download Visual C++ 2010 @ http://www.microsoft.com/en-us/download/details.aspx?id=5555
 
 
 
-*module <name> doens't exist:
+*module <name> doens't exist:*
 
 >python.exe -m pip install <name>
 
