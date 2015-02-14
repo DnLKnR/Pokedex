@@ -15,7 +15,7 @@ For executable to run properly, keep Pokedex folder structure as is.
 
 
 
-*To Run the \*.py file:*
+**To Run the *.py file:**
 
 1. Download Python 3.4: https://www.python.org/downloads/
 
@@ -33,18 +33,18 @@ For executable to run properly, keep Pokedex folder structure as is.
 
   >python.exe -m ensurepip
 
-  >python.exe -m pip install <paste link>
+  >python.exe -m pip install \<paste link\>
   
   
-_*Note if you get these errors:*_
+**Note if you get these errors:**
 
-*vcvarsall.bat doens't exist:* 
+**vcvarsall.bat doens't exist:**
 
 Go and Download Visual C++ 2010 @ http://www.microsoft.com/en-us/download/details.aspx?id=5555
 
 
 
-*module <name> doens't exist:*
+**module <name> doens't exist:**
 
 >python.exe -m pip install <name>
 
