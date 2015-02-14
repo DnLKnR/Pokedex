@@ -7,8 +7,6 @@ Python 3.4 w/ wxPython.
 
 Some features will not work with Linux.
 
-For executable to run properly, keep Pokedex folder structure as is.
-
 ### **To Run the pokedex.exe file:**
 1. Download the following items:
   * Images Directory
