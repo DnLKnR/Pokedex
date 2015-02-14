@@ -1,5 +1,5 @@
 # Pokedex
-Pokemon Index w/ Type weakness
+## Pokemon Index w/ Type weakness
 
 Executable is for Windows.
 
@@ -15,7 +15,7 @@ For executable to run properly, keep Pokedex folder structure as is.
 
 
 
-**To Run the *.py file:**
+### **To Run the *.py file:**
 
 1. Download Python 3.4: https://www.python.org/downloads/
 
@@ -36,7 +36,7 @@ For executable to run properly, keep Pokedex folder structure as is.
   >python.exe -m pip install \<paste link\>
   
   
-**Note if you get these errors:**
+### **Note if you get these errors:**
 
 **vcvarsall.bat doens't exist:**
 
@@ -48,4 +48,4 @@ Go and Download Visual C++ 2010 @ http://www.microsoft.com/en-us/download/detail
 
 >python.exe -m pip install <name>
 
-If that doens't work, google "<name> python" and download the correct library
+If that doens't work, google "\<name\> python" and download the correct library
