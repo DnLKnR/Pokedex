@@ -21,6 +21,14 @@ To Run the *.py file:
 
 2. Go to http://wxpython.org/Phoenix/snapshot-builds/ and copy link address of the correct file for your Python version
 
+Example:
+
+  "wxPython_Phoenix-3.0.3.<ignore this>-cp34-none-win_amd64.whl" would by Python 3.4 (cp34) 64-bit (amd64).
+  
+  "wxPython_Phoenix-3.0.3.<ignore this>-cp34-none-win32.whl" would by Python 3.4 (cp34) 32-bit (win32).
+  
+  
+
 3. Go to Python directory contain "python.exe" in command prompt and run the following:
 
   >python.exe -m ensurepip
