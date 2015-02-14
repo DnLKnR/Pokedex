@@ -1,4 +1,4 @@
-import urllib
+import urllib.request,ast
 
 
 class Scrape:
@@ -7,8 +7,8 @@ class Scrape:
 	def scrape(self):
 		url1 = 'http://pokemondb.net/pokedex/all'
 		url2 = 'http://www.pokeffectiveness.com/'
-		self.html1 = urllib.urlopen(url1).read()
-		self.html2 = urllib.urlopen(url2).read()
+		self.html1 = urllib.request.urlopen(url1).read()
+		self.html2 = urllib.request.urlopen(url2).read()
 		file = open('pokedata.cfg','w')
 		self.getStats()
 		self.getWeaknesses()
@@ -18,7 +18,7 @@ class Scrape:
 		all_data_str = str(self.all_data).replace(', \'',',\'')
 		file.write(all_data_str)
 		file.close()
-		self.reset(self.all_data)
+		return self.all_data
 		
 	def getStats(self):
 		self.all_data = []

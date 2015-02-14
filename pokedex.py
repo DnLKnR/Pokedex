@@ -1,14 +1,12 @@
 #Pokemon Types
 from pokelist import PokeList
 from scrape import Scrape
-import os.path, wx, ast
-from wx.lib.mixins.listctrl import ListCtrlAutoWidthMixin
-#website: pokemondb.net
+import os.path, wx, wx.adv, wx.lib.mixins.listctrl, ast
 
-class AutoWidthListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin):
+class AutoWidthListCtrl(wx.ListCtrl,wx.lib.mixins.listctrl.ListCtrlAutoWidthMixin):
     def __init__(self, parent):
         wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT | wx.LC_NO_HEADER, size=(363,120))
-        ListCtrlAutoWidthMixin.__init__(self)
+        wx.lib.mixins.listctrl.ListCtrlAutoWidthMixin.__init__(self)
 	
 class Pokedex(wx.Frame):
 	def __init__(self,parent,id,title):
@@ -309,7 +307,7 @@ class Pokedex(wx.Frame):
 
 	def rescrape(self,event):
 		self.Hide()
-		self.mySplash = wx.SplashScreen(app.myBitmap, wx.SPLASH_NO_TIMEOUT | wx.SPLASH_CENTRE_ON_PARENT, -1, None)
+		self.mySplash = wx.adv.SplashScreen(app.myBitmap, wx.adv.SPLASH_NO_TIMEOUT | wx.adv.SPLASH_CENTER_ON_SCREEN, -1, None)
 		self.mySplash.Show()
 		self.all_data = self.Scrape.scrape()
 		self.reset(self.all_data)
@@ -319,10 +317,10 @@ class Pokedex(wx.Frame):
 
 app = wx.App()
 app.myBitmap = wx.Bitmap('Images/Pokemon_Logo.png',wx.BITMAP_TYPE_PNG)
-# app.mySplash = wx.SplashScreen(app.myBitmap, wx.SPLASH_NO_TIMEOUT | wx.SPLASH_CENTER_ON_SCREEN, -1, None)
-# app.mySplash.Show()
+app.mySplash = wx.adv.SplashScreen(app.myBitmap, wx.adv.SPLASH_NO_TIMEOUT | wx.adv.SPLASH_CENTER_ON_SCREEN, -1, None)
+app.mySplash.Show()
 app.Pokedex = Pokedex(None,-1,"Pokedex")
 app.Pokedex.SetTitle('Pokedex')
 app.Pokedex.Show()
-# app.mySplash.Destroy()
+app.mySplash.Destroy()
 app.MainLoop()
