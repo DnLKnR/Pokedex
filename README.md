@@ -9,8 +9,18 @@ Some features will not work with Linux.
 
 For executable to run properly, keep Pokedex folder structure as is.
 
+### **To Run the pokedex.exe file:**
+1. Download the following items:
+  * Images Directory
+  * pokedata.cfg
+  * pokedata.default.cfg
+  * pokedex.exe
+2. Keep structure level the same
+  * *This is because the paths are relative in the code*
+3. Run the exe
 
-### **To Run the *.py file:**
+
+### **To Run the pokedex.py file:**
 1. Download Python 3.4: https://www.python.org/downloads/
 2. Go to http://wxpython.org/Phoenix/snapshot-builds/ and copy link address of the correct file for your Python version
   * Example:
