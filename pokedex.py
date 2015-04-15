@@ -4,9 +4,9 @@ from scrape import Scrape
 import os.path, wx, wx.adv, wx.lib.mixins.listctrl, ast
 
 class AutoWidthListCtrl(wx.ListCtrl,wx.lib.mixins.listctrl.ListCtrlAutoWidthMixin):
-    def __init__(self, parent):
-        wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT | wx.LC_NO_HEADER, size=(363,120))
-        wx.lib.mixins.listctrl.ListCtrlAutoWidthMixin.__init__(self)
+	def __init__(self, parent):
+		wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT | wx.LC_NO_HEADER, size=(363,120))
+		wx.lib.mixins.listctrl.ListCtrlAutoWidthMixin.__init__(self)
 	
 class Pokedex(wx.Frame):
 	def __init__(self,parent,id,title):
@@ -34,16 +34,17 @@ class Pokedex(wx.Frame):
 		self.CB.SetSelection(0)
 		#create menubar
 		self.menubar = wx.MenuBar()
+		#create file menu
 		self.filemenu = wx.Menu()
-		self.settings = wx.Menu()
-		self.m_stayontop = self.settings.Append(wx.ID_ANY,'Stay on Top [Off]\tCtrl-S','')
-		self.m_resize = self.settings.Append(wx.ID_ANY,'Resizable [Off]\tCtrl-E','')
-		self.filemenu.Append(wx.ID_ANY,'Options...',self.settings)
+		self.m_stayontop = self.filemenu.Append(wx.ID_ANY,'Stay on Top [Off]\tCtrl-S','')
+		self.m_resize = self.filemenu.Append(wx.ID_ANY,'Resizable [Off]\tCtrl-E','')
 		self.m_track = self.filemenu.Append(wx.ID_ANY,'Show Tracked\tCtrl-T','')
 		self.m_rescrape = self.filemenu.Append(wx.ID_ANY,'Rescrape Html\tCtrl-R','')
 		self.m_close = self.filemenu.Append(wx.ID_ANY, 'Close\tCtrl-Q','')
 		self.menubar.Append(self.filemenu, 'File')
+		#bind events to menu options
 		self.Bind(wx.EVT_MENU, self.stay_on_top, self.m_stayontop)
+		self.Bind(wx.EVT_MENU, self.resizable, self.m_resize)
 		self.Bind(wx.EVT_MENU, self.toggle_track_mode, self.m_track)
 		self.Bind(wx.EVT_MENU, self.rescrape, self.m_rescrape)
 		self.Bind(wx.EVT_MENU, self.on_close, self.m_close)
@@ -170,10 +171,10 @@ class Pokedex(wx.Frame):
 			self.m_stayontop.SetItemLabel('Stay on Top [Off]\tCtrl-S')
 	
 	def resizable(self,event):
-		if self.ToggleWindowStyle(flag = wx.RESIZE_BORDER | wx.MAXIMIZE_BOX):
-			self.m_resize.SetItemLabel('Resizable [Off]\tCtrl-E')
-		else:
+		if self.ToggleWindowStyle(flag = wx.RESIZE_BORDER):
 			self.m_resize.SetItemLabel('Resizable [On]\tCtrl-E')
+		else:
+			self.m_resize.SetItemLabel('Resizable [Off]\tCtrl-E')
 	
 	def track(self,event):
 		if self.LC.GetItemCount():
